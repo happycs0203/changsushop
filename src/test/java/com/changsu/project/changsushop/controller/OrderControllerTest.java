@@ -17,6 +17,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
+import org.springframework.transaction.annotation.Transactional;
 
 import javax.persistence.EntityManager;
 import java.util.ArrayList;
@@ -25,6 +26,7 @@ import java.util.List;
 import static org.junit.jupiter.api.Assertions.*;
 
 @SpringBootTest
+@Transactional
 class OrderControllerTest {
 
     @Autowired
@@ -48,7 +50,6 @@ class OrderControllerTest {
                 .email("happycs0203@naver.com")
                 .address("서울시")
                 .addressDetail("목동서로 130")
-                .buildingName("목동4단지아파트")
                 .zipcode("12345")
                 .build();
 

@@ -28,7 +28,6 @@ class MemberUpdateFormTest {
                 .passwordNewConf("Hamchangsu020#")
                 .address("서울시")
                 .addressDetail("목동서로130")
-                .buildingName("목동4단지아파트")
                 .zipcode("123555")
                 .build();
 

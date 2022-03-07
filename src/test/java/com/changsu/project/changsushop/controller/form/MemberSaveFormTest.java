@@ -26,7 +26,6 @@ class MemberSaveFormTest {
                 .email("asdfasdf")
                 .address("")
                 .addressDetail("")
-                .buildingName("")
                 .zipcode("")
                 .build();
 

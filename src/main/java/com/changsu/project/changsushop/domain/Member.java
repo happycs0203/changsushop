@@ -37,7 +37,7 @@ public class Member extends BaseTimeEntity {
 
     @Builder
     public Member(String email, String password, String name){
-        this(email, password, name, null);
+        this(email, password, name ,null);
     }
 
     @Builder
@@ -46,6 +46,7 @@ public class Member extends BaseTimeEntity {
         this.password = password;
         this.name = name;
         this.address = address;
+        this.role = Role.USER;
     }
 
     public Member(String email, String name, Role role) {

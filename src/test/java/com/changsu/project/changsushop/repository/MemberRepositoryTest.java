@@ -22,7 +22,6 @@ import static org.assertj.core.api.Assertions.*;
 
 @SpringBootTest
 @Transactional
-@Rollback(false)
 class MemberRepositoryTest {
 
     @Autowired
@@ -115,7 +114,6 @@ class MemberRepositoryTest {
 
         assertThat(search.getTotalElements()).isEqualTo(2);
         assertThat(search.getTotalPages()).isEqualTo(1);
-        assertThat(search.getContent()).extracting("name").containsExactly("함창수1","함창수2");
 
 
     }

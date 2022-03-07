@@ -42,7 +42,7 @@ public class MemberSaveForm {
     private Role role = Role.USER;
 
     @Builder
-    public MemberSaveForm(String email, String password, String name, String addres, String addressDetail, String zipcode) {
+    public MemberSaveForm(String email, String password, String name, String address, String addressDetail, String zipcode) {
         this.email = email;
         this.password = password;
         this.name = name;

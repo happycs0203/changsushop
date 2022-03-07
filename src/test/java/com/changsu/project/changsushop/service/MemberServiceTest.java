@@ -7,12 +7,14 @@ import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.transaction.annotation.Transactional;
 
 import javax.persistence.EntityManager;
 
 import static org.assertj.core.api.Assertions.*;
 
 @SpringBootTest
+@Transactional
 class MemberServiceTest {
 
     @Autowired
@@ -31,7 +33,6 @@ class MemberServiceTest {
                 .email("happycs0203@naver.com")
                 .address("서울시")
                 .addressDetail("목동서로 130")
-                .buildingName("목동4단지아파트")
                 .zipcode("12345")
                 .build();
 
@@ -39,27 +40,23 @@ class MemberServiceTest {
         Long saveId = memberService.save(memberSaveForm);
         Member findMember = memberService.findById(saveId);
 
-        Thread.sleep(10000);
-
         MemberUpdateForm memberUpdateForm = MemberUpdateForm.builder()
-                .id(1L)
+                .id(saveId)
                 .name("함창수1")
                 .password("Hamchangsu020#")
                 .passwordNew("Hamchangsu020#")
                 .passwordNewConf("Hamchangsu020#")
                 .address("서울시 양천구")
                 .addressDetail("목동서로 130길")
-                .buildingName("목동4 단지아파트")
                 .zipcode("12355")
                 .build();
 
         memberService.update(memberUpdateForm);
 
-        Member updateMember = memberService.findById(1L);
+        Member updateMember = memberService.findById(saveId);
 
         //then
-        assertThat(saveId).isEqualTo(1L);
-        assertThat(findMember.getName()).isEqualTo("함창수");
+        assertThat(saveId).isEqualTo(saveId);
         assertThat(updateMember.getName()).isEqualTo("함창수1");
 
     }

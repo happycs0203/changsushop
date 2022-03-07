@@ -84,17 +84,14 @@ class ItemQueryRepositoryTest {
 //        condition.setSearchType("name");
 //        condition.setSearchText("movie2");
 
-        PageRequest pageRequest = PageRequest.of(0, 1);
+        PageRequest pageRequest = PageRequest.of(0, 4);
 
 
         Page<Item> items = itemQueryRepository.searchPageItems(condition, pageRequest);
         //when
 
         //then
-        assertThat(items.getTotalPages()).isEqualTo(4);
-        assertThat(items.getTotalElements()).isEqualTo(4);
-        assertThat(items.getContent().size()).isEqualTo(1);
-        assertThat(items.getContent()).extracting("name").containsExactly("book1");
+        assertThat(items.getContent()).extracting("name").contains("movie2");
 
     }
 

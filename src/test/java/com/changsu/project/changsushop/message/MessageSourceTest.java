@@ -74,7 +74,7 @@ public class MessageSourceTest {
         Assertions.assertThat(messageCodesFields)
                 .containsExactly(
                         "required.item.itemName",
-                        "required.item",
+                        "required.itemName",
                         "required.java.lang.String",
                         "required"
                 );

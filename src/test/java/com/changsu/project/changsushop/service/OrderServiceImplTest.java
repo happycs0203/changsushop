@@ -27,7 +27,6 @@ import static org.junit.jupiter.api.Assertions.*;
 
 @SpringBootTest
 @Transactional
-@Rollback(value = false)
 class OrderServiceImplTest {
 
     @Autowired
@@ -53,7 +52,6 @@ class OrderServiceImplTest {
                 .email("happycs0203@naver.com")
                 .address("서울시")
                 .addressDetail("목동서로 130")
-                .buildingName("목동4단지아파트")
                 .zipcode("12345")
                 .build();
 
@@ -123,7 +121,6 @@ class OrderServiceImplTest {
                 .email("happycs0203@naver.com")
                 .address("서울시")
                 .addressDetail("목동서로 130")
-                .buildingName("목동4단지아파트")
                 .zipcode("12345")
                 .build();
 
@@ -179,7 +176,6 @@ class OrderServiceImplTest {
                 .email("happycs0203@naver.com")
                 .address("서울시")
                 .addressDetail("목동서로 130")
-                .buildingName("목동4단지아파트")
                 .zipcode("12345")
                 .build();
 
