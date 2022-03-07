@@ -1,0 +1,37 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="fragments/header :: header">
+    <title>Hello</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+</head>
+<body>
+<div class="container">
+    <div th:replace="fragments/bodyHeader :: bodyHeader" />
+    <div class="jumbotron">
+        <h1 th:text="#{label.shopHeader}">HELLO SHOP</h1>
+        <p th:text="#{label.memberFunction}" class="lead">회원 기능</p>
+        <p>
+            <a class="mb-2 btn btn-lg btn-secondary" th:text="#{button.signUp}" href="/members/new">회원 가입</a>
+            <a class="mb-2 btn btn-lg btn-secondary" th:text="#{button.memberList}" href="/members">회원 목록</a>
+        </p>
+        <p th:text="#{label.itemFunction}" class="lead">상품 기능</p>
+        <p>
+            <a class="mb-2 btn btn-lg btn-dark" th:text="#{button.album.register}" href="items/albums/new">음악 등록</a>
+            <a class="mb-2 btn btn-lg btn-dark" th:text="#{button.book.register}" href="items/books/new">책 등록</a>
+            <a class="mb-2 btn btn-lg btn-dark" th:text="#{button.movie.register}" href="items/movies/new">영화 등록</a>
+            <a class="mb-2 btn btn-lg btn-dark" th:text="#{button.itemList}" href="/items">상품 목록</a>
+        </p>
+        <p th:text="#{label.orderFunction}" class="lead">주문 기능</p>
+        <p>
+            <a class="mb-2 btn btn-lg btn-info" th:text="#{button.orderItem}" href="/orders/new">상품 주문</a>
+            <a class="mb-2 btn btn-lg btn-info" th:text="#{button.orderList}" href="/orders">주문 내역</a>
+        </p>
+        <p th:text="#{label.deliveryFunction}" class="lead">배달 기능</p>
+        <p>
+            <a class="mb-2 btn btn-lg btn-info" th:text="#{button.deliveryList}" href="/deliveries">주문 내역</a>
+        </p>
+    </div>
+    <div th:replace="fragments/footer :: footer" />
+</div> <!-- /container -->
+</body>
+</html>

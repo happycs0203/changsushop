@@ -1,0 +1,92 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="fragments/header :: header" />
+<style>
+    .fieldError {
+        border-color: #bd2130;
+    }
+</style>
+<body>
+<div class="container">
+    <div th:replace="fragments/bodyHeader :: bodyHeader"/>
+    <div class="row justify-content-center">
+        <div class="col-md-6 col-lg-6">
+            <div class="page-header">
+                <div class="col-12">
+                    <h4 class="mb-3"  th:text="#{page.signUp}">회원가입 Form</h4>
+                </div>
+            </div>
+
+            <div class="col-12">
+            <form role="form" action="/members/new" th:object="${memberForm}" method="post">
+                <div class="form-group">
+                    <label for="email" th:text="#{label.member.memberEmail}">이메일</label>
+                    <input type="text" id="email" th:field="*{email}"
+                           th:errorclass="field-error" class="form-control" placeholder="이메일을 입력하세요">
+                    <div class="field-error" th:errors="*{email}">
+                        이메일 오류
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="password" th:text="#{label.member.memberPassword}">비밀번호</label>
+                    <input type="password" id="password" th:field="*{password}"
+                           th:errorclass="field-error" class="form-control" placeholder="비밀번호를 입력하세요">
+                    <div class="field-error" th:errors="*{password}">
+                        비밀번호 오류
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="name" th:text="#{label.member.memberName}">이름</label>
+                    <input type="text" id="name" th:field="*{name}"
+                           th:errorclass="field-error" class="form-control" placeholder="이름을 입력하세요">
+                    <div class="field-error" th:errors="*{name}">
+                        이름 오류
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="zipcode" th:text="#{label.address.zipcode}">우편번호</label>
+                    <div class="input-group">
+                        <input type="text" id="zipcode" th:field="*{zipcode}"
+                               th:errorclass="field-error" class="form-control" placeholder="우편번호" readonly>
+                        <input type="button" class="btn btn-outline-primary" onclick="searchDaumPostcode()" value="우편번호 찾기">
+                        <div class="field-error" th:errors="*{zipcode}">
+                            우편번호 오류
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group ">
+                    <label for="address" th:text="#{label.address.address}">주소</label>
+                    <input type="text" id="address" th:field="*{address}"
+                           th:errorclass="field-error" class="form-control" placeholder="주소" readonly>
+                    <div class="field-error" th:errors="*{address}">
+                        주소 오류
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="addressDetail" th:text="#{label.address.addressDetail}">상세 주소</label>
+                    <input type="text" id="addressDetail" th:field="*{addressDetail}"
+                           th:errorclass="field-error" class="form-control" placeholder="상세 주소를 입력하세요">
+                    <div class="field-error" th:errors="*{addressDetail}">
+                        상세 주소 오류
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="addressReference" th:text="#{label.address.addressReference}">참고 항목</label>
+                    <input type="text" id="addressReference" class="form-control" placeholder="참고 항목" readonly>
+                </div>
+                <div class="form-group text-center">
+                    <button type="submit" id="join-submit" class="btn btn-primary" th:text="#{button.signUp}">
+                        회원가입<i class="fa fa-check spaceLeft"></i>
+                    </button>
+                </div>
+            </form>
+            </div>
+        </div>
+    </div>
+    <br/>
+    <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
+    <script type="text/javascript" src="/js/zipcode.js"></script>
+    <div th:replace="fragments/footer :: footer" />
+</div> <!-- /container -->
+</body>
+</html>

@@ -1,0 +1,76 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="fragments/header :: header" />
+<style>
+    .fieldError {
+        border-color: #bd2130;
+    }
+</style>
+<body>
+<div class="container">
+    <div th:replace="fragments/bodyHeader :: bodyHeader"/>
+    <div class="row justify-content-center">
+        <div class="col-md-6 col-lg-6">
+            <div class="page-header">
+                <div class="col-12">
+                    <h4 class="mb-3" th:text="#{page.movie.register}">영화 등록 Form</h4>
+                </div>
+            </div>
+
+            <div class="col-12">
+                <form role="form" action="/items/movies/new" th:object="${movieForm}" method="post">
+                    <div class="form-group">
+                        <label for="name" th:text="#{label.movie.name}">영화제목</label>
+                        <input type="text" id="name" th:field="*{name}"
+                               th:errorclass="field-error" class="form-control" placeholder="영화 제목을 입력하세요">
+                        <div class="field-error" th:errors="*{name}">
+                            영화 제목 오류
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="price" th:text="#{label.movie.price}">영화가격</label>
+                        <input type="text" id="price" th:field="*{price}"
+                               th:errorclass="field-error" class="form-control" placeholder="영화 가격을 입력하세요">
+                        <div class="field-error" th:errors="*{price}">
+                            영화 가격 오류
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="stockQuantity" th:text="#{label.movie.stockQuantity}">영화 수량</label>
+                        <input type="text" id="stockQuantity" th:field="*{stockQuantity}"
+                               th:errorclass="field-error" class="form-control" placeholder="영화 수량을 입력하세요">
+                        <div class="field-error" th:errors="*{stockQuantity}">
+                            영화 수량 오류
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="director" th:text="#{label.movie.director}">감독</label>
+                        <input type="text" id="director" th:field="*{director}"
+                               th:errorclass="field-error" class="form-control" placeholder="감독을 입력하세요">
+                        <div class="field-error" th:errors="*{director}">
+                            감독 오류
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="actor" th:text="#{label.movie.actor}">배우</label>
+                        <input type="text" id="actor" th:field="*{actor}"
+                               th:errorclass="field-error" class="form-control" placeholder="배우를 입력하세요">
+                        <div class="field-error" th:errors="*{actor}">
+                            배우 오류
+                        </div>
+                    </div>
+
+                    <div class="form-group text-center">
+                        <button type="submit" id="join-submit" class="btn btn-primary" th:text="#{button.movie.register}">
+                            영화 등록<i class="fa fa-check spaceLeft"></i>
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+    <br/>
+    <div th:replace="fragments/footer :: footer" />
+</div> <!-- /container -->
+</body>
+</html>

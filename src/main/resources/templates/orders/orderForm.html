@@ -1,0 +1,257 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="fragments/header :: header" />
+<body>
+<div class="container">
+    <div th:replace="fragments/bodyHeader :: bodyHeader"/>
+
+    <h4 class="mb-3"  th:text="#{page.orderItem}">상품주문 Form</h4>
+
+    <div>
+    <p class="h6"><strong>회원리스트</strong></p>
+    <div id="memberList" class="form-group">
+        <!--            <div th:replace="orders/orderFormMemberList :: orderFormMemberList"/>-->
+    </div>
+    <p class="h6" ><strong>상품리스트</strong></p>
+    <div id="itemList" class="form-group">
+        <!--            <div th:replace="orders/orderFormItemList :: orderFormItemList"/>-->
+    </div>
+
+
+    <form role="form" id="orderForm" name="orderForm" action="/orders/new" method="post">
+        <div class="form-group">
+            <p class="h6"><strong>회원정보</strong></p>
+            <table id="orderMemberTable">
+                <thead>
+                <tr>
+                    <th>#</th>
+                    <th>회원명</th>
+                    <th>이메일</th>
+                    <th></th>
+                </tr>
+                </thead>
+                <tbody id="orderMember">
+                <tr >
+                    <td><input type="text" class="form-control" id="memberId" name="memberId" readonly /></td>
+                    <td><input type="text" class="form-control" id="memberName" name="memberName" disabled/></td>
+                    <td><input type="text" class="form-control" id="memberEmail" name="memberEmail"  disabled/></td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <div class="form-group">
+            <p class="h6"><strong>주문상품정보</strong></p>
+            <table id="orderItemTable">
+                <thead>
+                <tr>
+                    <th>#</th>
+                    <th>상품명</th>
+                    <th>상품가격</th>
+                    <th>수량</th>
+                    <th></th>
+                </tr>
+                </thead>
+                <tbody id="orderItems">
+                <tr class="first">
+                    <td><input type="text" class="itemId form-control" name="items[0].itemId" readonly/></td>
+                    <td><input type="text" class="name form-control" name="items[0].name" readonly/></td>
+                    <td><input type="number" class="orderPrice form-control" name="items[0].orderPrice" disabled/></td>
+                    <td><input type="number" class="count form-control" name="items[0].count"/></td>
+                    <td><input type="button"  class="btn btn-danger" onclick="removeItem(this)" value="삭제"></td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <div class="form-group text-center">
+            <button type="submit" id="order-submit" class="btn btn-primary" th:text="#{button.order}">
+                주문<i class="fa fa-check spaceLeft"></i>
+            </button>
+        </div>
+    </form>
+    <br/>
+    <div th:replace="fragments/footer :: footer" />
+</div> <!-- /container -->
+</body>
+<script>
+
+    $(document).ready(function (){
+        $(document).on("click", "#itemSearchBtn", function () {
+            itemList(0);
+
+        });
+        $(document).on("click", "#memberSearchBtn", function () {
+            memberList(0);
+
+        });
+
+        $( "#orderForm" ).submit(function( event ) {
+
+            if($("#memberId").val() == ''){
+                alert( "회원을 선택해주세요." );
+                event.preventDefault();
+                return false;
+            }
+
+            let tbody = $("#orderItemTable").find('tbody');
+            let firstTr = tbody.find('tr.first');
+
+
+            if(firstTr.length == 1){
+                let td = firstTr.eq(0).find('td');
+                let itemId = td.eq(0).find('input').val();
+
+                alert(itemId);
+                if(itemId == ''){
+                    alert( "상품을 선택해주세요." );
+                    event.preventDefault();
+                }
+
+            }else{
+                let counts = tbody.find('.count');
+                for (const count of counts) {
+                    if($(count).val() == ''){
+                        alert("수량을 입력해주세요.");
+                        $(count).focus();
+                        event.preventDefault();
+                        return false;
+                    }
+                }
+            }
+
+        });
+
+        itemList(0);
+        memberList(0);
+
+    })
+
+    function memberList(page) {
+
+        let memberSearchForm = $('#memberSearchForm').serialize() + "&page=" + page;
+
+        $.ajax({
+            url: "/orders/memberList",
+            data: memberSearchForm,
+            method: "GET",
+            dataType: "html",
+            success: function (result) {
+                $("#memberList").html(result);
+            },
+            error: function (err) {
+                console.log(err);
+            }
+        })
+
+    }
+
+    function itemList(page) {
+        let itemSearchForm = $('#itemSearchForm').serialize() + "&page=" + page;
+        $.ajax({
+            url: "/orders/itemList",
+            data: itemSearchForm,
+            method: "GET",
+            dataType: "html",
+            success: function (result) {
+                $("#itemList").html(result);
+            },
+            error: function (err) {
+                console.log(err);
+            }
+
+        })
+    }
+
+
+    function removeItem(btn){
+
+        let tbody = $("#orderItemTable").find('tbody');
+        let tr = tbody.find('tr')
+        let length = tr.length;
+        if(length == 1){
+            tr.find('input.form-control').val('')
+            tr.addClass('first');
+        }else {
+            $(btn).parent().parent().remove();
+        }
+
+        resetName();
+    }
+
+    function resetName() {
+        let tr = $("#orderItemTable").find('tbody tr');
+        tr.each(function (i){
+            let td = tr.eq(i).find('td');
+            console.log(i)
+            console.log(td.eq(0));
+            console.log(td.eq(0).children());
+            td.eq(0).find('input').attr('name', 'items[' + i + '].itemId');
+            td.eq(1).find('input').attr('name', 'items[' + i + '].name');
+            td.eq(2).find('input').attr('name', 'items[' + i + '].orderPrice');
+            td.eq(3).find('input').attr('name', 'items[' + i + '].count');
+        })
+    }
+
+    function addItem(btn){
+
+        if($("#memberId").val() == ''){
+            alert( "회원을 먼저 선택해주세요." );
+            return false;
+        }
+
+        let tbody = $("#orderItemTable").find('tbody');
+        let tr = tbody.find('tr:last');
+        let copyTr = tr.clone(true).removeClass('first');
+        let length = tbody.find('tr.first').length;
+
+        //상품리스트확인
+        let td = $(btn).parent().parent().children();
+        const itemId = td.eq(0).text();
+        const itemName = td.eq(2).text();
+        const itemPrice = td.eq(3).text();
+        const itemQuantity = td.eq(4).text();
+
+
+        let itemIds = tbody.find('.itemId');
+
+        //중복확인
+        for (const inputItemId of itemIds) {
+            let item = $(inputItemId).val();
+            if(item == itemId){
+                alert("해당 상품이 추가 되어있습니다. 확인해주세요.");
+                return false;
+            }
+        }
+
+        if(length == 1){
+            tr.remove();
+        }
+
+        //주문상품값입력
+        let copyTd = copyTr.children();
+        copyTd.eq(0).find('input').val(itemId);
+        copyTd.eq(1).find('input').val(itemName);
+        copyTd.eq(2).find('input').val(itemPrice);
+        // copyTd.eq(3).find('input').val(itemQuantity);
+        
+        tbody.append(copyTr);
+
+        resetName();
+
+    }
+
+    function  selectMember(btn){
+        let td = $(btn).parent().parent().children();
+        const memberId = td.eq(0).text();
+        const memberName = td.eq(1).text();
+        const memberEmail = td.eq(2).text();
+
+        $("#memberId").val(memberId);
+        $("#memberName").val(memberName);
+        $("#memberEmail").val(memberEmail);
+    }
+
+
+</script>
+</html>

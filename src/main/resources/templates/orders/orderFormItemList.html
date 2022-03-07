@@ -1,0 +1,101 @@
+<html xmlns:th="http://www.thymeleaf.org">
+<div th:fragment="orderFormItemList">
+    <form id="itemSearchForm" th:object="${itemSearch}" class="form-inline">
+        <div class="form-group mb-2">
+            <select class="form-control"  th:field="*{dtype}">
+                <option th:value="ALL" th:text="전체"></option>
+                <option th:value="ALBUM" th:text="앨범"></option>
+                <option th:value="BOOK" th:text="책"></option>
+                <option th:value="MOVIE" th:text="영화"></option>
+            </select>
+        </div>
+        <div class="form-group mb-2">
+            <select class="form-control"  th:field="*{searchType}">
+                <option th:value="name" th:text="상품명"></option>
+            </select>
+        </div>
+        <div class="form-group mb-2">
+            <input type="text" th:field="*{searchText}" class="form-control" placeholder="입력하세요."/>
+        </div>
+        <button type="button" id="itemSearchBtn" class="btn btn-primary mb-2">검색</button>
+    </form>
+</div>
+
+
+<div>
+    <table class="table table-striped">
+        <thead>
+        <tr>
+            <th>#</th>
+            <th>상품타입</th>
+            <th>상품명</th>
+            <th>가격</th>
+            <th>재고수량</th>
+            <th></th>
+        </tr>
+        </thead>
+        <tbody>
+
+        <tr th:each="item : ${items}">
+            <td th:text="${item.id}"></td>
+            <td th:text="${item.dtype}"></td>
+            <td th:text="${item.name}"></td>
+            <td th:text="${item.price}"></td>
+            <td th:text="${item.stockQuantity}"></td>
+            <td><input type="button" class="btn btn-sm btn-primary" onclick="addItem(this)" value="상품추가"></td>
+        </tr>
+        </tbody>
+    </table>
+</div>
+
+<div style="align-items:center; display: flex; justify-content:center;" th:if="${!items.isEmpty()}">
+    <nav style="text-align: center;"
+            th:with="
+                pageNumber = ${items.pageable.pageNumber},
+                pageSize = ${items.pageable.pageSize},
+                totalPages = ${items.totalPages},
+                startPage = ${T(Math).floor(pageNumber / pageSize) * pageSize + 1 },
+                tempEndPage = ${startPage + pageSize - 1},
+                endPage = (${tempEndPage > totalPages ? totalPages : tempEndPage})
+            " aria-label="Page navigation"
+    >
+        <ul class="pagination ">
+            <li th:classappend="${pageNumber<= pageSize} ? 'disabled'" class="page-item">
+                <a class="page-link" th:href="'javascript:itemList(0)'">
+                    <span>&laquo;</span>
+                    <span class="sr-only">First</span>
+                </a>
+            </li>
+
+            <li th:classappend="${items.first} ? 'disabled'" class="page-item">
+                <a class="page-link" th:href="${items.first} ? '#' :
+                    'javascript:itemList('+ ${pageNumber - 1} +')'" aria-label="Previous">
+                    <span aria-hidden="true">&lt;</span>
+                    <span class="sr-only">Previous</span>
+                </a>
+            </li>
+
+            <li th:each="page: ${#numbers.sequence(startPage, endPage)}"
+                th:classappend="${page == pageNumber + 1 } ? 'active'" class="page-item">
+                <a th:text="${page}" class="page-link" th:href="'javascript:itemList('+ ${page - 1} +')'">
+                </a>
+            </li>
+
+            <li th:classappend="${items.last} ? 'disabled'" class="page-item">
+                <a class="page-link" th:href="${items.last} ? '#' :
+                    'javascript:itemList('+ ${pageNumber + 1} +')'" aria-label="Next">
+                    <span aria-hidden="true">&gt;</span>
+                    <span class="sr-only">Next</span>
+                </a>
+            </li>
+
+            <li th:classappend=" ${T(Math).floor(totalPages / pageSize) * pageSize - 1 <= startPage} ? 'disabled'" class="page-item">
+                <a class="page-link" th:href="'javascript:itemList('+ ${totalPages + 1} +')'">
+                    <span>&raquo;</span>
+                    <span class="sr-only">Last</span>
+                </a>
+            </li>
+        </ul>
+    </nav>
+
+</div>

@@ -1,0 +1,62 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="fragments/header :: header" />
+<style>
+    .fieldError {
+        border-color: #bd2130;
+    }
+</style>
+<body>
+<div class="container">
+    <div th:replace="fragments/bodyHeader :: bodyHeader"/>
+    <div class="row justify-content-center">
+        <div class="col-md-6 col-lg-6">
+            <div class="page-header">
+                <div class="col-12">
+                    <p class="h4 mb-3"th:text="#{page.member}">회원상세</p>
+                </div>
+            </div>
+        <!--    <h5 th:if="${param.status}" th:text="'저장 완료'"></h5>-->
+            <div class="col-12">
+                <div class="form-group">
+                    <label for="email" th:t ext="#{label.member.memberEmail}">이메일</label>
+                    <input type="text" id="email" class="form-control" th:value="${member.email}" readonly>
+                </div>
+                <div class="form-group">
+                    <label for="name" th:text="#{label.member.memberName}">이름</label>
+                    <input type="text" id="name" class="form-control" th:value="${member.name}" readonly>
+                </div>
+                <div class="form-group">
+                    <label for="zipcode" th:text="#{label.address.zipcode}">우편번호</label>
+                    <input type="text" id="zipcode" class="form-control" th:value="${member.zipcode}" readonly>
+
+                </div>
+                <div class="form-group">
+                    <label for="address" th:text="#{label.address.address}">주소</label>
+                    <input type="text" id="address"  class="form-control" th:value="${member.address}" readonly>
+                </div>
+                <div class="form-group">
+                    <label for="addressDetail" th:text="#{label.address.addressDetail}">상세 주소</label>
+                    <input type="text" id="addressDetail" class="form-control"  th:value="${member.addressDetail}" readonly>
+                </div>
+                <div class="form-group text-center">
+                    <button class="btn btn-primary"
+                            onclick="location.href='updateMemberForm.html'"
+                            th:onclick="|location.href='@{/members/{memberId}/update(memberId=${member.id})}'|"
+                            type="button" th:text="#{button.updateMember}">회원수정
+                    </button>
+                    <button class="btn btn-warning"
+                            onclick="location.href='memberList.html'"
+                            th:onclick="|location.href='@{/members}'|"
+                            type="button" th:text="#{button.memberList}">회원목록
+                    </button>
+
+                </div>
+            </div>
+        </div>
+    </div>
+    <br/>
+    <div th:replace="fragments/footer :: footer" />
+</div> <!-- /container -->
+</body>
+</html>

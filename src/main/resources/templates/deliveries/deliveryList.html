@@ -1,0 +1,179 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="fragments/header :: header"/>
+<body>
+<div class="container">
+    <div th:replace="fragments/bodyHeader :: bodyHeader"/>
+
+    <h4 class="mb-3"  th:text="#{page.delivery.list}">배송리스트</h4>
+
+    <div>
+        <div>
+            <form th:object="${deliverySearch}" class="form-inline">
+
+                <div class="form-group mx-sm-1 mb-2">
+                    <select th:field="*{deliveryStatus}" class="form-control">
+                        <option value="">배송상태</option>
+                        <option th:each="status : ${T(com.changsu.project.changsushop.domain.DeliveryStatus).values()}"
+                                th:value="${status}"
+                                th:text="${status}">option
+                        </option>
+                    </select>
+
+                </div>
+                <div class="form-group mx-sm-1 mb-2">
+                    <select th:field="*{searchType}" class="form-control">
+                        <option value="name">회원명</option>
+                        <option value="orderId">주문번호</option>
+                    </select>
+                </div>
+                <div class="form-group mb-2">
+                    <input type="text" th:field="*{searchText}" class="form-control" placeholder="검색명"/>
+                </div>
+                <button type="submit" class="btn btn-primary mb-2">검색</button>
+            </form>
+        </div>
+        <input type="button" class="btn btn-outline-primary mb-2 mr-3" id="changeComp" style="float: right;" value="배달완료적용">
+        <table class="table table-striped">
+            <thead>
+            <tr>
+                <th><input type="checkbox" id="checkAll"></th>
+                <th>회원명</th>
+                <th>주문번호</th>
+                <th>주문상품명</th>
+                <th>배송상태</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="delivery : ${deliveries}">
+                <td><input type="checkbox" name="delivery" th:value="${delivery.id}"></td>
+                <td >
+                    <a th:href="@{/orders/{orderId}(orderId=${delivery.order.id})}"
+                       th:text="${delivery.order.member.name}"></a>
+                </td>
+                <td th:text="${delivery.order.id}"></td>
+                <td th:text="${delivery.order.orderItems[0].item.name}"></td>
+                <td>
+                    <a th:if="${delivery.status.name() == 'READY'}" class="btn btn-sm btn-primary">
+                        준비
+                    </a>
+                    <a th:if="${delivery.status.name() == 'COMP'}" class="btn btn-sm btn-danger">
+                        완료
+                    </a>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <div style="align-items:center; display: flex; justify-content:center;" th:if="${!deliveries.isEmpty()}">
+        <nav
+                th:with="
+                pageNumber = ${deliveries.pageable.pageNumber},
+                pageSize = ${deliveries.pageable.pageSize},
+                totalPages = ${deliveries.totalPages},
+                startPage = ${T(Math).floor(pageNumber / pageSize) * pageSize + 1 },
+                tempEndPage = ${startPage + pageSize - 1},
+                endPage = (${tempEndPage > totalPages ? totalPages : tempEndPage})
+            " aria-label="Page navigation"
+        >
+            <ul class="pagination ">
+                <li th:classappend="${pageNumber<= pageSize} ? 'disabled'" class="page-item">
+                    <a class="page-link" th:href="@{/deliveries(page=0,deliveryStatus=${deliverySearch.deliveryStatus},searchType=${deliverySearch.searchType},searchText=${deliverySearch.searchText})}">
+                        <span>&laquo;</span>
+                        <span class="sr-only">First</span>
+                    </a>
+                </li>
+
+                <li th:classappend="${deliveries.first} ? 'disabled'" class="page-item">
+                    <a class="page-link" th:href="${deliveries.first} ? '#' : @{/deliveries(page=${pageNumber - 1},deliveryStatus=${deliverySearch.deliveryStatus},searchType=${deliverySearch.searchType},searchText=${deliverySearch.searchText})}" aria-label="Previous">
+                        <span aria-hidden="true">&lt;</span>
+                        <span class="sr-only">Previous</span>
+                    </a>
+                </li>
+
+                <li th:each="page: ${#numbers.sequence(startPage, endPage)}"
+                    th:classappend="${page == pageNumber + 1 } ? 'active'" class="page-item">
+                    <a th:text="${page}" class="page-link" th:href="@{/deliveries(page=${page - 1},deliveryStatus=${deliverySearch.deliveryStatus},searchType=${deliverySearch.searchType},searchText=${deliverySearch.searchText})}">
+                    </a>
+                </li>
+
+                <li th:classappend="${deliveries.last} ? 'disabled'" class="page-item">
+                    <a class="page-link" th:href="${deliveries.last} ? '#' :
+                    @{/deliveries(page=${pag eNumber + 1},deliveryStatus=${deliverySearch.deliveryStatus},searchType=${deliverySearch.searchType},searchText=${deliverySearch.searchText})}" aria-label="Next">
+                        <span aria-hidden="true">&gt;</span>
+                        <span class="sr-only">Next</span>
+                    </a>
+                </li>
+
+                <li th:classappend=" ${T(Math).floor(totalPages / pageSize) * pageSize - 1 <= startPage} ? 'disabled'" class="page-item">
+                    <a class="page-link" th:href="@{/deliveries(page=${totalPages - 1},deliveryStatus=${deliverySearch.deliveryStatus},searchType=${deliverySearch.searchType},searchText=${deliverySearch.searchText})}">
+                        <span>&raquo;</span>
+                        <span class="sr-only">Last</span>
+                    </a>
+                </li>
+            </ul>
+        </nav>
+
+    </div>
+
+
+    <div th:replace="fragments/footer :: footer"/>
+</div> <!-- /container -->
+</body>
+<script>
+    $(document).ready(function (){
+
+        $('#checkAll').click(function (){
+            if($('#checkAll').is(":checked")){
+                $('input:checkbox[name="delivery"]').attr('checked', true);
+            }else{
+                $('input:checkbox[name="delivery"]').attr('checked', false);
+            }
+        })
+
+        
+        $('#changeComp').click(function (){
+            let deliveryStatus = $('#deliveryStatus').val();
+            let searchType = $('#searchType').val();
+            let seartchText = $('#searchText').val();
+            
+            let deliveries = [];
+            $('input:checkbox[name="delivery"]:checked').each(function (){
+                deliveries.push($(this).val());
+            })
+
+            if(deliveries.length == 0){
+                alert('1개 이상 선택해주세요.');
+                return false;
+            }
+
+            console.log(deliveries);
+
+            $.ajax({
+                url : "/deliveries/changeStatus",
+                data : {
+                    deliveries: deliveries,
+                },
+                method : "POST",
+                dataType: "text"
+            })
+            .done(function(result) {
+               if(result == 'success'){
+                   alert('배송상태가 COMP로 적용이 되었습니다.');
+                   window.location.href = '/deliveries?deliveryStatus='+deliveryStatus+'&searchType='+searchType+'&searchText='+seartchText;
+               }else {
+                   alert('오류가 발생되었습니다.');
+               }
+            })
+            .fail(function(request, err) {
+                console.log(err);
+                alert( "오류가 발생되었습니다." );
+            })
+            .always(function() {
+            });
+
+        })
+    })
+</script>
+</html>

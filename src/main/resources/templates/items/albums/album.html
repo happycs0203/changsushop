@@ -1,0 +1,65 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="fragments/header :: header" />
+<style>
+    .fieldError {
+        border-color: #bd2130;
+    }
+</style>
+<body>
+<div class="container">
+    <div th:replace="fragments/bodyHeader :: bodyHeader"/>
+    <div class="row justify-content-center">
+        <div class="col-md-6 col-lg-6">
+            <div class="page-header">
+                <div class="col-12">
+                    <p class="h4" th:text="#{page.album}">앨범상세</p>
+                </div>
+            </div>
+
+            <div class="col-12">
+                <div class="form-group">
+                    <label for="name" th:text="#{label.album.name}">앨범명</label>
+                    <input type="text" id="name" class="form-control"  th:value="${album.name}"  readonly>
+                </div>
+                <div class="form-group">
+                    <label for="price" th:text="#{label.album.price}">앨범가격</label>
+                    <input type="text" id="price" class="form-control" th:value="${album.price}" readonly>
+
+                </div>
+                <div class="form-group">
+                    <label for="stockQuantity" th:text="#{label.album.stockQuantity}">앨범수량</label>
+                    <input type="text" id="stockQuantity"class="form-control" th:value="${album.stockQuantity}" readonly>
+
+                </div>
+                <div class="form-group">
+                    <label for="artist" th:text="#{label.album.artist}">가수</label>
+                    <input type="text" id="artist" class="form-control" th:value="${album.artist}" readonly>
+
+                </div>
+                <div class="form-group">
+                    <label for="etc" th:text="#{label.album.etc}">설명</label>
+                    <input type="text" id="etc" class="form-control" th:value="${album.etc}" readonly>
+                </div>
+
+                <div class="form-group text-center">
+                    <button class="btn btn-primary"
+                            onclick="location.href='updateAlbumForm.html'"
+                            th:onclick="|location.href='@{/items/albums/{albumId}/update(albumId=${album.id})}'|"
+                            type="button" th:text="#{button.album.update}">앨범수정
+                    </button>
+                    <button class="btn btn-warning"
+                            onclick="location.href='albumList.html'"
+                            th:onclick="|location.href='@{/items}'|"
+                            type="button" th:text="#{button.album.list}">상품목록
+                    </button>
+                </div>
+            </form>
+            </div>
+        </div>
+    </div>
+    <br/>
+    <div th:replace="fragments/footer :: footer" />
+</div> <!-- /container -->
+</body>
+</html>
