@@ -11,9 +11,12 @@ plugins {
 	id "com.ewerk.gradle.plugins.querydsl" version "1.0.10"
 	id 'java'
 }
+bootJar {
+	archiveClassifier = 'boot'
+}
 
 jar {
-	enabled = false
+	archiveClassifier = ''
 }
 
 group = 'com.changsu.project'
