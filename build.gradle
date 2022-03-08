@@ -16,6 +16,7 @@ bootJar {
 }
 
 jar {
+	enabled = true
 	archiveClassifier = ''
 }
 
@@ -50,7 +51,7 @@ dependencies {
 
 	compileOnly 'org.projectlombok:lombok'
 	runtimeOnly 'com.h2database:h2:1.4.199'
-	runtimeOnly 'org.mariadb.jdbc:mariadb-java-client'
+	runtimeOnly 'mysql:mysql-connector-java'
 	annotationProcessor 'org.projectlombok:lombok'
 	testImplementation 'org.springframework.boot:spring-boot-starter-test'
 	testImplementation 'org.springframework.security:spring-security-test'

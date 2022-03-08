@@ -15,7 +15,7 @@ import java.util.List;
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 public class Member extends BaseTimeEntity {
 
-    @Id @GeneratedValue
+    @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "member_id")
     private Long id;
 
@@ -37,7 +37,7 @@ public class Member extends BaseTimeEntity {
 
     @Builder
     public Member(String email, String password, String name){
-        this(email, password, name ,null);
+        this(email, password, name , new Address("", "",""));
     }
 
     @Builder
