@@ -9,7 +9,7 @@
         <form method="POST" action="/login">
             <div class="row justify-content-center">
                 <div class="col-md-4">
-                    <h1 class="h3 mb-3 fw-normal">로그인</h1>
+                    <h1 class="h3 mb-3 fw-normal" th:text="#{button.signIn}">로그인</h1>
                 </div>
             </div>
             <div th:if="${errorMessage} ne null">
@@ -19,35 +19,35 @@
                 <div class="col-md-4">
                     <div class="form-floating">
                         <input type="email" class="form-control" name="email" id="email" th:value="${email}"  placeholder="id@example.com">
-                        <label for="email">이메일 입력</label>
+                        <label for="email" th:text="#{label.member.emailInput}">이메일 입력</label>
                     </div>
                 </div>
             </div>
             <div class="row justify-content-center">
                 <div class="col-md-4">
                     <div class="form-floating">
-                        <input type="password" class="form-control" name="password" id="password"  placeholder="Password">
-                        <label for="password">비밀번호 입력</label>
+                        <input type="password" class="form-control" name="password" id="password" th:placeholder="#{label.member.memberPassword}" placeholder="Password">
+                        <label for="password" th:text="lable.member.passwordInput">비밀번호 입력</label>
                     </div>
                 </div>
             </div>
             <div class="row justify-content-center">
                 <div class="form-check col-md-4 mb-3">
                     <input class="form-check-input" type="checkbox" id="remember-me" name="remember-me" />
-                    <label class="form-check-label" for="remember-me">
+                    <label class="form-check-label" for="remember-me" th:text="#{lbael.member.stayLoggedIn}">
                         로그인 유지
                     </label>
                 </div>
             </div>
             <div class="row justify-content-center">
                 <div class="col-md-4 mb-3">
-                    <button class="w-100 btn btn-lg btn-primary" type="submit">로그인</button>
+                    <button class="w-100 btn btn-lg btn-primary" type="submit" th:text="#{button.signIn}">로그인</button>
                 </div>
             </div>
 
             <div class="row justify-content-center">
                 <div class="col-md-4">
-                   <a class="link-dark" href="/members/new"><small>이메일 회원가입</small></a>
+                   <a class="link-dark" href="/members/new" th:text="#{button.signUp}"><small>회원가입</small></a>
                 </div>
             </div>
             <a href="/oauth2/authorization/google" class="btn btn-success active" role="button">Google Login</a>

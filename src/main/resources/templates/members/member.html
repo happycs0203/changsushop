@@ -19,7 +19,7 @@
         <!--    <h5 th:if="${param.status}" th:text="'저장 완료'"></h5>-->
             <div class="col-12">
                 <div class="form-group">
-                    <label for="email" th:t ext="#{label.member.memberEmail}">이메일</label>
+                    <label for="email" th:text="#{label.member.memberEmail}">이메일</label>
                     <input type="text" id="email" class="form-control" th:value="${member.email}" readonly>
                 </div>
                 <div class="form-group">

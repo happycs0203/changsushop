@@ -19,7 +19,7 @@
 
                     <label for="email" th:text="#{label.member.memberEmail}">이메일</label>
                     <input type="text" id="email" readonly th:field="*{email}"
-                           th:errorclass="field-error" class="form-control" placeholder="이메일을 입력하세요">
+                           th:errorclass="field-error" class="form-control" th:placeholder="#{placeholder.email}">
                     <div class="field-error" th:errors="*{email}">
                         이메일 오류
                     </div>
@@ -27,7 +27,7 @@
                 <div class="form-group">
                     <label for="password" th:text="#{label.member.memberPassword}">비밀번호</label>
                     <input type="password" id="password" th:field="*{password}"
-                           th:errorclass="field-error" class="form-control" placeholder="비밀번호를 입력하세요">
+                           th:errorclass="field-error" class="form-control" th:placeholder="#{placeholder.password}">
                     <div class="field-error" th:errors="*{password}">
                         비밀번호 오류
                     </div>
@@ -35,7 +35,7 @@
                 <div  class="form-group">
                     <label for="passwordNew" th:text="#{label.member.memberPasswordNew}">새 비밀번호</label>
                     <input type="password" id="passwordNew" th:field="*{passwordNew}"
-                           th:errorclass="field-error" class="form-control" placeholder="비밀번호를 입력하세요">
+                           th:errorclass="field-error" class="form-control" th:placeholder="#{placeholder.password}">
                     <div class="field-error" th:errors="*{passwordNew}">
                         비밀번호 오류
                     </div>
@@ -43,7 +43,7 @@
                 <div  class="form-group">
                     <label for="passwordNewConf" th:text="#{label.member.memberPasswordNewConf}">새 비밀번호 확인</label>
                     <input type="password" id="passwordNewConf" th:field="*{passwordNewConf}"
-                           th:errorclass="field-error" class="form-control" placeholder="비밀번호를 입력하세요">
+                           th:errorclass="field-error" class="form-control" th:placeholder="#{placeholder.password}">
                     <div class="field-error" th:errors="*{passwordNewConf}">
                         비밀번호 오류
                     </div>
@@ -51,7 +51,7 @@
                 <div class="form-group">
                     <label for="name" th:text="#{label.member.memberName}">이름</label>
                     <input type="text" id="name" th:field="*{name}"
-                           th:errorclass="field-error" class="form-control" placeholder="이름을 입력하세요">
+                           th:errorclass="field-error" class="form-control" th:placeholder="#{placeholder.name}">
                     <div class="field-error" th:errors="*{name}">
                         이름 오류
                     </div>
@@ -60,8 +60,8 @@
                     <label for="zipcode" th:text="#{label.address.zipcode}">우편번호</label>
                     <div class="input-group">
                         <input type="text" id="zipcode" th:field="*{zipcode}"
-                               th:errorclass="field-error" class="form-control" placeholder="우편번호" readonly>
-                        <input type="button" class="btn btn-outline-primary" onclick="searchDaumPostcode()" value="우편번호 찾기">
+                               th:errorclass="field-error" class="form-control" th:placeholder="#{placeholder.zipcode}" readonly>
+                        <input type="button" class="btn btn-outline-primary" onclick="searchDaumPostcode()" th:value="#{button.zipcodeSearch}">
                         <div class="field-error" th:errors="*{zipcode}">
                             우편번호 오류
                         </div>
@@ -70,7 +70,7 @@
                 <div class="form-group ">
                     <label for="address" th:text="#{label.address.address}">주소</label>
                     <input type="text" id="address" th:field="*{address}"
-                           th:errorclass="field-error" class="form-control" placeholder="주소" readonly>
+                           th:errorclass="field-error" class="form-control" th:placeholder="#{placeholder.address}" readonly>
                     <div class="field-error" th:errors="*{address}">
                         주소 오류
                     </div>
@@ -78,14 +78,14 @@
                 <div class="form-group">
                     <label for="addressDetail" th:text="#{label.address.addressDetail}">상세 주소</label>
                     <input type="text" id="addressDetail" th:field="*{addressDetail}"
-                           th:errorclass="field-error" class="form-control" placeholder="상세 주소를 입력하세요">
+                           th:errorclass="field-error" class="form-control" th:placeholder="#{placeholder.addressDetail}">
                     <div class="field-error" th:errors="*{addressDetail}">
                         상세 주소 오류
                     </div>
                 </div>
                 <div class="form-group">
                     <label for="addressReference" th:text="#{label.address.addressReference}">참고 항목</label>
-                    <input type="text" id="addressReference" class="form-control" placeholder="참고 항목" readonly>
+                    <input type="text" id="addressReference" class="form-control" th:placeholder="#{placeholder.addressReference}" readonly>
                 </div>
 
                 <div class="form-group text-center">
