@@ -28,7 +28,7 @@ public class LoginController {
 
     @GetMapping("/login")
     public String loginForm(HttpServletRequest request){
-        return "/members/login";
+        return "members/login";
     }
 
     @PostMapping("/login")
@@ -39,7 +39,7 @@ public class LoginController {
         }
         model.addAttribute("email", email);
 
-        return "/members/login";
+        return "members/login";
     }
 
 
