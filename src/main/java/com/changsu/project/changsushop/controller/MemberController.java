@@ -36,8 +36,7 @@ public class MemberController {
     private final MemberService memberService;
 
     @GetMapping("/members")
-    public String members(Model model, @Validated @ModelAttribute("memberSearch") MemberSearchCondition condition,
-                          @PageableDefault(page = 0, size = 2, sort = "member_id", direction = Sort.Direction.DESC) Pageable pageable) {
+    public String members(Model model, @Validated @ModelAttribute("memberSearch") MemberSearchCondition condition, Pageable pageable) {
 
         System.out.println(pageable.getPageSize());
         System.out.println("pageable = " + pageable.getPageNumber());

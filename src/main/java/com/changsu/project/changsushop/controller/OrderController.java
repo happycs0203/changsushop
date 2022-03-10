@@ -36,8 +36,7 @@ public class OrderController {
     private final OrderItemQueryRepository orderItemQueryRepository;
 
     @GetMapping("/orders")
-    public String orders(@ModelAttribute("orderSearch") OrderSearchCondition condition, Model model,
-                         @PageableDefault(page = 0, size = 10, sort = "order_id", direction = Sort.Direction.DESC) Pageable pageable) {
+    public String orders(@ModelAttribute("orderSearch") OrderSearchCondition condition, Model model, Pageable pageable) {
 
         Page<Order> orders = orderService.orderPageList(condition, pageable);
 
@@ -46,8 +45,7 @@ public class OrderController {
     }
 
     @GetMapping("/orders/{orderId}")
-    public String order(@PathVariable("orderId") Long orderId, Model model,
-                        @PageableDefault(page = 0,size = 3, sort = "order_item_id", direction = Sort.Direction.DESC) Pageable pageable) {
+    public String order(@PathVariable("orderId") Long orderId, Model model, Pageable pageable) {
 
         Page<OrderItemDto> orderItems = orderItemQueryRepository.orderItemPageList(orderId, pageable);
 
@@ -62,7 +60,7 @@ public class OrderController {
 
     @GetMapping("/orders/memberList")
     public String ordersMemberList(@ModelAttribute("memberSearch") MemberSearchCondition condition, Model model,
-                                   @PageableDefault(page = 0, size = 2, sort = "mebmer_id", direction = Sort.Direction.DESC) Pageable pageable) {
+                                   @PageableDefault(page = 0, size = 5, sort = "member_id", direction = Sort.Direction.DESC) Pageable pageable) {
 
         Page<MemberForm> members = memberRepository.searchPageByCondition(condition, pageable);
 
@@ -72,7 +70,7 @@ public class OrderController {
 
     @GetMapping("/orders/itemList")
     public String ordersItemList(@ModelAttribute("itemSearch") ItemSearchCondition condition, Model model,
-                                 @PageableDefault(page = 0, size = 2, sort = "item_id", direction = Sort.Direction.DESC) Pageable pageable) {
+                                 @PageableDefault(page = 0, size = 5, sort = "item_id", direction = Sort.Direction.DESC) Pageable pageable) {
 
         Page<Item> items = itemQueryRepository.searchPageItems(condition, pageable);
 
@@ -107,12 +105,6 @@ public class OrderController {
         return result;
     }
 
-
-//    @PostMapping("/orders/new")
-//    public String create(@ModelAttribute("orderForm") OrderSaveForm form) {
-//
-//
-//
-//    }
+    
 
 }

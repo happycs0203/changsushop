@@ -34,14 +34,15 @@
             </form>
         </div>
         <input type="button" class="btn btn-outline-primary mb-2 mr-3" id="changeComp" style="float: right;" value="배달완료적용">
-        <table class="table table-striped">
+        <div class="table-responsive-xl">
+        <table class="table table-sm table-striped" style="width: 1100px;font-size: 15px;">
             <thead>
             <tr>
-                <th><input type="checkbox" id="checkAll"></th>
-                <th>회원명</th>
-                <th>주문번호</th>
-                <th>주문상품명</th>
-                <th>배송상태</th>
+                <th style="width:10%;"><input type="checkbox" id="checkAll"></th>
+                <th style="width:25%;">회원명</th>
+                <th style="width:15%;">주문번호</th>
+                <th style="width:35%;">주문상품명</th>
+                <th style="width:15%;">배송상태</th>
             </tr>
             </thead>
             <tbody>
@@ -64,6 +65,7 @@
             </tr>
             </tbody>
         </table>
+        </div>
     </div>
 
     <div style="align-items:center; display: flex; justify-content:center;" th:if="${!deliveries.isEmpty()}">

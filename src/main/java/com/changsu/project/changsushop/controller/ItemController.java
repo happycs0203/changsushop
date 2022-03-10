@@ -26,8 +26,7 @@ public class ItemController {
     private final ItemQueryRepository itemQueryRepository;
 
     @GetMapping("/items")
-    public String findAll(Model model,@ModelAttribute("itemSearch") ItemSearchCondition condition,
-                          @PageableDefault(page = 0, size = 3, sort = "id", direction = Sort.Direction.DESC) Pageable pageable){
+    public String findAll(Model model,@ModelAttribute("itemSearch") ItemSearchCondition condition, Pageable pageable){
         Page<Item> items = itemQueryRepository.searchPageItems(condition, pageable);
 
         model.addAttribute("items", items);
