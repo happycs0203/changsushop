@@ -14,9 +14,9 @@
                 </select>
             </div>
             <div class="form-group mb-2">
-                <input type="text" th:field="*{searchText}" class="form-control" placeholder="입력하세요."/>
+                <input type="text" th:field="*{searchText}" class="form-control" th:placeholder="#{placeholder.input}"/>
             </div>
-            <button type="submit" class="btn btn-primary mb-2">검색</button>
+            <button type="submit" class="btn btn-primary mb-2" th:value="#{button.search}">검색</button>
         </form>
     </div>
 
