@@ -29,7 +29,7 @@ public class DeliveryController {
 
         model.addAttribute("deliveries", deliveries);
 
-        return "/deliveries/deliveryList";
+        return "deliveries/deliveryList";
     }
 
     @PostMapping("/deliveries/changeStatus")
