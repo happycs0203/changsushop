@@ -9,8 +9,8 @@
         <form th:object="${memberSearch}" class="form-inline">
             <div class="form-group mb-2">
                 <select class="form-control"  th:field="*{searchType}">
-                    <option th:value="name" th:text="이름"></option>
-                    <option th:value="email" th:text="이메일"></option>
+                    <option th:value="name" th:text="#{label.member.memberName}"></option>
+                    <option th:value="email" th:text="#{label.member.memberEmail}"></option>
                 </select>
             </div>
             <div class="form-group mb-2">
