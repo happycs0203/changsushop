@@ -26,7 +26,6 @@ public class HomeController {
     @ResponseBody
     public String changeLocale(@RequestParam("language") String language, HttpServletRequest request) {
 
-        System.out.println(language);
         HttpSession session = request.getSession();
         session.setAttribute(SessionLocaleResolver.LOCALE_SESSION_ATTRIBUTE_NAME, new Locale(language));
 

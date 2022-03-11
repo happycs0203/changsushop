@@ -15,6 +15,9 @@
             <div th:if="${errorMessage} ne null">
                 <p class="field-error" th:text="${errorMessage}"></p>
             </div>
+            <div th:if="${redirectURL} ne null">
+               <input type="hidden" name="redirectURL" th:value="${redirectURL}">
+            </div>
             <div class="row justify-content-center">
                 <div class="col-md-4">
                     <div class="form-floating">

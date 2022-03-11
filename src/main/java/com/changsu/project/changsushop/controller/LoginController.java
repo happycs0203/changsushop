@@ -27,17 +27,23 @@ public class LoginController {
     private final LoginService loginService;
 
     @GetMapping("/login")
-    public String loginForm(HttpServletRequest request){
+    public String loginForm(HttpServletRequest request, Model model){
+
+        String redirectURL = request.getParameter("redirectURL");
+        model.addAttribute("redirectURL", redirectURL);
+
         return "members/login";
     }
 
     @PostMapping("/login")
     public String login(HttpServletRequest request, Model model) {
         String email = request.getParameter("email");
+        String redirectURL = request.getParameter("redirectURL");
         if (request.getParameter("error").equals("true")) {
             model.addAttribute("errorMessage", "아이디나 비밀번호가 맞지 않습니다. 확인해주세요.");
         }
         model.addAttribute("email", email);
+        model.addAttribute("redirectURL", redirectURL);
 
         return "members/login";
     }
