@@ -6,7 +6,7 @@
 <div class="container">
     <div th:replace="fragments/bodyHeader :: bodyHeader" />
     <main class="form-signing text-center">
-        <form method="POST" action="/login">
+        <form method="POST" name="loginForm" id="loginForm" action="/login">
             <div class="row justify-content-center">
                 <div class="col-md-4">
                     <h1 class="h3 mb-3 fw-normal" th:text="#{button.signIn}">로그인</h1>
@@ -62,4 +62,18 @@
     <div th:replace="fragments/footer :: footer" />
 </div>
 </body>
+<script>
+    $(document).ready(function (){
+        $('#loginForm').submit(function (event){
+            let password = $('#password').val();
+
+            if (password.trim() == "") {
+                alert('비밀번호를 입력해주세요.');
+                event.preventDefault();
+            }
+
+        })
+    })
+
+</script>
 </html>
