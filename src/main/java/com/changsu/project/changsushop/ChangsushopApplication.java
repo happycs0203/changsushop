@@ -12,7 +12,6 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import java.util.Optional;
 import java.util.UUID;
 
-@EnableJpaAuditing
 @SpringBootApplication
 public class ChangsushopApplication {
 
