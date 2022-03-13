@@ -1,6 +1,6 @@
 # Changsushop
 - Changsushop 개발 관련 내용
-- 상품을 주문 할 수 있는 웹 서비스
+- 상품 등록 및 주문 할 수 있는 주문관리 웹 서비스
 ------------
 # 이력
 - v0.0.1
@@ -27,7 +27,12 @@
   - window 10
   - github
   - mysql
+  - Spring Boot 2.6.3
+  - JQuery
   - java 1.8
+  - QueryDSL
+  - Spring Data JPA
+  - thymeleaf
 
 - 라이브러리
 ```
