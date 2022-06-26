@@ -24,7 +24,7 @@
 ------------
 # 구성
 - 환경
-  - window 10
+  - AWS
   - github
   - mysql
   - Spring Boot 2.6.3
