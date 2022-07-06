@@ -11,6 +11,11 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Map;
 
+/**
+ * @desc 인증용 객체 커스텀
+ * @author ChangSu, Ham
+ * @version 1.0
+ */
 @Data
 public class CustomDetails implements UserDetails, OAuth2User {
     private Member member; // composition

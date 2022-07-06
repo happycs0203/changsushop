@@ -7,6 +7,12 @@ import lombok.Getter;
 
 import java.util.Map;
 
+
+/**
+ * @desc OAuth2UserService를 통해 가져온 OAuth2User의 attribute를 담을 클래스
+ * @author ChangSu, Ham
+ * @version 1.0
+ */
 @Getter
 public class OAuthAttributes {
     private Map<String, Object> attributes;

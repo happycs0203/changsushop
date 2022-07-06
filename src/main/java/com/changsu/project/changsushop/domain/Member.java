@@ -10,6 +10,11 @@ import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * @desc 회원 정보 엔티티
+ * @author ChangSu, Ham
+ * @version 1.0
+ */
 @Entity
 @Getter @Setter(AccessLevel.PROTECTED)
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
@@ -19,18 +24,18 @@ public class Member extends BaseTimeEntity {
     @Column(name = "member_id")
     private Long id;
 
-    private String email;
+    private String email; //이메일
 
-    private String password;
+    private String password; //패스워드
 
-    private String name;
+    private String name; //이름
 
     @Enumerated(EnumType.STRING)
     @Column(nullable = false)
-    private Role role;
+    private Role role; //롤
 
     @Embedded
-    private Address address;
+    private Address address; //주소
 
     @OneToMany(mappedBy = "member") //매핑된 거울일뿐이야.
     private List<Order> orders = new ArrayList<>();

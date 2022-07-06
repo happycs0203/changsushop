@@ -12,6 +12,11 @@ import java.util.List;
 
 import static javax.persistence.FetchType.LAZY;
 
+/**
+ * @desc 카테고리 정보 엔티티
+ * @author ChangSu, Ham
+ * @version 1.0
+ */
 @Entity
 @Getter @Setter(AccessLevel.PROTECTED)
 @NoArgsConstructor(access = AccessLevel.PROTECTED)

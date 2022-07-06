@@ -24,6 +24,11 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import java.util.List;
 
+/**
+ * @desc 주문 생성 수정 조회 컨트롤러
+ * @author ChangSu, Ham
+ * @version 1.0
+ */
 @Controller
 @RequiredArgsConstructor
 public class OrderController {
@@ -35,6 +40,13 @@ public class OrderController {
 
     private final OrderItemQueryRepository orderItemQueryRepository;
 
+    /**
+     * @desc 주문 조회 로직
+     * @param condition
+     * @param model
+     * @param pageable
+     * @return
+     */
     @GetMapping("/orders")
     public String orders(@ModelAttribute("orderSearch") OrderSearchCondition condition, Model model, Pageable pageable) {
 
@@ -44,6 +56,13 @@ public class OrderController {
         return "orders/orderList";
     }
 
+    /**
+     * @desc 주문 상세 정보 조회
+     * @param orderId
+     * @param model
+     * @param pageable
+     * @return
+     */
     @GetMapping("/orders/{orderId}")
     public String order(@PathVariable("orderId") Long orderId, Model model, Pageable pageable) {
 
@@ -58,6 +77,13 @@ public class OrderController {
         return "orders/orderItemList";
     }
 
+    /**
+     * @desc 상품 주문 회원리스트
+     * @param condition 회원 검색 객체
+     * @param model
+     * @param pageable
+     * @return
+     */
     @GetMapping("/orders/memberList")
     public String ordersMemberList(@ModelAttribute("memberSearch") MemberSearchCondition condition, Model model,
                                    @PageableDefault(page = 0, size = 5, sort = "member_id", direction = Sort.Direction.DESC) Pageable pageable) {
@@ -68,6 +94,13 @@ public class OrderController {
         return "orders/orderFormMemberList";
     }
 
+    /**
+     * @desc 상품 주문 상품리스트
+     * @param condition 상품 검색 객체
+     * @param model
+     * @param pageable
+     * @return
+     */
     @GetMapping("/orders/itemList")
     public String ordersItemList(@ModelAttribute("itemSearch") ItemSearchCondition condition, Model model,
                                  @PageableDefault(page = 0, size = 5, sort = "item_id", direction = Sort.Direction.DESC) Pageable pageable) {
@@ -78,11 +111,22 @@ public class OrderController {
         return "orders/orderFormItemList";
     }
 
+    /**
+     * @desc 상품 주문 페이지 이동
+     * @param model
+     * @return
+     */
     @GetMapping("/orders/new")
     public String createForm(Model model) {
         return "orders/orderForm";
     }
 
+    /**
+     * @desc 상품 주문 로직
+     * @param form
+     * @param redirectAttributes
+     * @return
+     */
     @PostMapping("/orders/new")
     public String create(@ModelAttribute("orderForm") OrderSaveForm form, RedirectAttributes redirectAttributes) {
 
@@ -96,6 +140,11 @@ public class OrderController {
     }
 
 
+    /**
+     * @desc 주문 취소 로직
+     * @param orderId
+     * @return
+     */
     @PostMapping("/orders/{orderId}/cancel")
     @ResponseBody
     public String cancel(@PathVariable("orderId") Long orderId) {

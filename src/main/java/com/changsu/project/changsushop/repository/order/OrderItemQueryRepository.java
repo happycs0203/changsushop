@@ -17,6 +17,11 @@ import java.util.List;
 import static com.changsu.project.changsushop.domain.QOrderItem.*;
 import static com.changsu.project.changsushop.domain.item.QItem.*;
 
+/**
+ * @desc 주문 상품 레포지토리 QueryDSL 사용
+ * @author ChangSu, Ham
+ * @version 1.0
+ */
 @Repository
 public class OrderItemQueryRepository {
 
@@ -28,6 +33,11 @@ public class OrderItemQueryRepository {
         this.queryFactory = new JPAQueryFactory(em);
     }
 
+    /**
+     * @desc 주문 상품 리스트
+     * @param orderId
+     * @return
+     */
     public List<OrderItemDto> orderItemList(Long orderId) {
         List<OrderItemDto> orderItems = queryFactory.select(new QOrderItemDto(
                         orderItem.id,
@@ -45,6 +55,12 @@ public class OrderItemQueryRepository {
 
     }
 
+    /**
+     * @desc 주문 상품 리스트 페이징
+     * @param orderId
+     * @param pageable
+     * @return
+     */
     public Page<OrderItemDto> orderItemPageList(Long orderId, Pageable pageable) {
         List<OrderItemDto> orderItems = queryFactory.select(
                         new QOrderItemDto(

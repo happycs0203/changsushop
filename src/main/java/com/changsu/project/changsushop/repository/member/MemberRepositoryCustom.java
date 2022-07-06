@@ -9,13 +9,18 @@ import org.springframework.data.domain.Pageable;
 
 import java.util.List;
 
+/**
+ * @desc 멤퍼 레포지토리 커스텀 인터페이스 ( 여러개의 인터페이스를 사용하기 위함 )
+ * @author ChangSu, Ham
+ * @version 1.0
+ */
 public interface MemberRepositoryCustom {
 
-    public List<Member> search();
+    List<Member> search();
 
-    public List<Member> searchByName(String name);
+    List<Member> searchByName(String name);
 
-    public List<Member> searchByCondition(MemberSearchCondition condition);
+    List<Member> searchByCondition(MemberSearchCondition condition);
 
-    public Page<MemberForm> searchPageByCondition(MemberSearchCondition condition, Pageable pageable);
+    Page<MemberForm> searchPageByCondition(MemberSearchCondition condition, Pageable pageable);
 }

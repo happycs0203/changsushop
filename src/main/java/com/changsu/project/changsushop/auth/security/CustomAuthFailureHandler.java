@@ -12,6 +12,11 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
+/**
+ * @desc 로그인 실패 핸들러 구현 Spring Security
+ * @author ChangSu, Ham
+ * @version 1.0
+ */
 public class CustomAuthFailureHandler implements AuthenticationFailureHandler {
 
     private final String DEFAULT_FAILURE_URL = "/login?error=true";

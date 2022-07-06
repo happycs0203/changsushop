@@ -8,14 +8,19 @@ import lombok.*;
 import javax.persistence.DiscriminatorValue;
 import javax.persistence.Entity;
 
+/**
+ * @desc 상품 - 책 정보 엔티티
+ * @author ChangSu, Ham
+ * @version 1.0
+ */
 @Entity
 @DiscriminatorValue("BOOK")
 @Getter
 @Setter(AccessLevel.PROTECTED)
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 public class Book extends Item{
-    private String author;
-    private String isbn;
+    private String author; //저자
+    private String isbn; //isbn
 
     public Book(int price, String name, int stockQuantity,String author, String isbn) {
         setPrice(price);

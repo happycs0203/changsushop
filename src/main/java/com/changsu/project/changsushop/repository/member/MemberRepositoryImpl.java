@@ -17,6 +17,11 @@ import java.util.List;
 
 import static com.changsu.project.changsushop.domain.QMember.*;
 
+/**
+ * @desc 멤퍼 레포지토리 커스텀 구현 QueryDSL을 사용
+ * @author ChangSu, Ham
+ * @version 1.0
+ */
 public class MemberRepositoryImpl implements MemberRepositoryCustom{
 
     private final JPAQueryFactory queryFactory;
@@ -25,6 +30,10 @@ public class MemberRepositoryImpl implements MemberRepositoryCustom{
         this.queryFactory = new JPAQueryFactory(em);
     }
 
+    /**
+     * @desc 멤버 조회
+     * @return
+     */
     @Override
     public List<Member> search() {
         return queryFactory
@@ -32,6 +41,11 @@ public class MemberRepositoryImpl implements MemberRepositoryCustom{
                 .fetch();
     }
 
+    /**
+     * @desc 이름으로 멤버 정보 조회
+     * @param name
+     * @return
+     */
     @Override
     public List<Member> searchByName(String name) {
         return queryFactory
@@ -41,6 +55,11 @@ public class MemberRepositoryImpl implements MemberRepositoryCustom{
     }
 
 
+    /**
+     * @desc 멤버 조회 객체에 해당하는 멤버 조회
+     * @param condition
+     * @return
+     */
     @Override
     public List<Member> searchByCondition(MemberSearchCondition condition) {
         return queryFactory
@@ -51,6 +70,12 @@ public class MemberRepositoryImpl implements MemberRepositoryCustom{
                 .fetch();
     }
 
+    /**
+     * @desc 멤버 조회 객체에 해당하는 멤버 조회 및 페이징 정보
+     * @param condition
+     * @param pageable 페이징
+     * @return
+     */
     @Override
     public Page<MemberForm> searchPageByCondition(MemberSearchCondition condition, Pageable pageable) {
         List<MemberForm> members = queryFactory
@@ -77,6 +102,11 @@ public class MemberRepositoryImpl implements MemberRepositoryCustom{
         return PageableExecutionUtils.getPage(members,pageable, () -> countQuery.fetchOne());
     }
 
+    /**
+     * @desc 동적 쿼리를 만듬
+     * @param condition
+     * @return
+     */
     private BooleanExpression memberConditionEq(MemberSearchCondition condition) {
         if (StringUtils.hasText(condition.getSearchType())) {
             if(condition.getSearchType().equals("name")){

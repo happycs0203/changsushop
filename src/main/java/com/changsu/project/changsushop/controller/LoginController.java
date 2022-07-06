@@ -19,6 +19,11 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 
+/**
+ * @desc 멤버 로그인 컨트롤러
+ * @author ChangSu, Ham
+ * @version 1.0
+ */
 @Controller
 @Slf4j
 @RequiredArgsConstructor
@@ -26,6 +31,12 @@ public class LoginController {
 
     private final LoginService loginService;
 
+    /**
+     * @desc 로그인 페이지 이동
+     * @param request
+     * @param model
+     * @return
+     */
     @GetMapping("/login")
     public String loginForm(HttpServletRequest request, Model model){
 
@@ -35,6 +46,12 @@ public class LoginController {
         return "members/login";
     }
 
+    /**
+     * @desc 로그인 로직
+     * @param request
+     * @param model
+     * @return
+     */
     @PostMapping("/login")
     public String login(HttpServletRequest request, Model model) {
         String email = request.getParameter("email");

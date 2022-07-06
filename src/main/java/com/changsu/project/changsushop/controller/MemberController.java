@@ -26,7 +26,11 @@ import java.util.List;
 
 import java.util.regex.Pattern;
 
-
+/**
+ * @desc 멤버 저장 수정 조회 컨트롤러
+ * @author ChangSu, Ham
+ * @version 1.0
+ */
 @Slf4j
 @Controller
 @RequiredArgsConstructor
@@ -35,6 +39,13 @@ public class MemberController {
     private final MemberRepository memberRepository;
     private final MemberService memberService;
 
+    /**
+     * @desc 멤버 조회 리스트
+     * @param model
+     * @param condition
+     * @param pageable
+     * @return
+     */
     @GetMapping("/members")
     public String members(Model model, @Validated @ModelAttribute("memberSearch") MemberSearchCondition condition, Pageable pageable) {
 
@@ -51,7 +62,12 @@ public class MemberController {
         return "members/memberList";
     }
 
-
+    /**
+     * @desc memberId 에 맞는 멤버 조회
+     * @param memberId 
+     * @param model
+     * @return
+     */
     @GetMapping("/members/{memberId}")
     public String member(@PathVariable long memberId, Model model) {
         Member member = memberService.findById(memberId);
@@ -59,12 +75,24 @@ public class MemberController {
         return "members/member";
     }
 
+    /**
+     * @desc 멤버 생성 페이지 이동
+     * @param model
+     * @return
+     */
     @GetMapping("/members/new")
     public String createForm(Model model) {
         model.addAttribute("memberForm", new MemberSaveForm());
         return "members/createMemberForm";
     }
 
+    /**
+     * @desc 멤버 생성 로직
+     * @param form
+     * @param bindingResult
+     * @param redirectAttributes
+     * @return
+     */
     @PostMapping("/members/new")
     public String create(@Validated @ModelAttribute("memberForm") MemberSaveForm form, BindingResult bindingResult, RedirectAttributes redirectAttributes) {
 
@@ -89,6 +117,12 @@ public class MemberController {
 
     }
 
+    /**
+     * @desc 회원 수정 페이지 이동
+     * @param memberId
+     * @param model
+     * @return
+     */
     @GetMapping("/members/{memberId}/update")
     public String updateForm(@PathVariable("memberId") Long memberId, Model model) {
         Member member = memberService.findById(memberId);
@@ -96,6 +130,14 @@ public class MemberController {
         return "members/updateMemberForm";
     }
 
+    /**
+     * @desc 회원 수정 로직
+     * @param memberId
+     * @param form
+     * @param bindingResult
+     * @param redirectAttributes
+     * @return
+     */
     @PostMapping("/members/{memberId}/update")
     public String update(@PathVariable("memberId") Long memberId, @Validated @ModelAttribute("memberForm") MemberUpdateForm form, BindingResult bindingResult, RedirectAttributes redirectAttributes) {
 

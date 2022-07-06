@@ -10,6 +10,11 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 
+/**
+ * @desc 주문 서비스 인터페이스
+ * @author ChangSu, Ham
+ * @version 1.0
+ */
 public interface OrderService {
 
     public Long save(OrderSaveForm form);

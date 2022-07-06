@@ -9,6 +9,11 @@ import javax.persistence.Column;
 import javax.persistence.EntityListeners;
 import javax.persistence.MappedSuperclass;
 
+/**
+ * @desc 엔티티 기본정보 생성한 직원, 수정한 직원
+ * @author ChangSu, Ham
+ * @version 1.0
+ */
 @EntityListeners(AuditingEntityListener.class)
 @Getter
 @MappedSuperclass

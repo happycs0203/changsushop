@@ -22,6 +22,11 @@ import org.springframework.transaction.annotation.Transactional;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * @desc 주문 서비스 구현
+ * @author ChangSu, Ham
+ * @version 1.0
+ */
 @Service
 @Transactional(readOnly = true)
 @Slf4j
@@ -36,6 +41,11 @@ public class OrderServiceImpl implements OrderService {
     private final OrderItemQueryRepository orderItemQueryRepository;
 
 
+    /**
+     * @desc 주문 생성
+     * @param form
+     * @return
+     */
     @Override
     @Transactional
     public Long save(OrderSaveForm form) {
@@ -62,11 +72,21 @@ public class OrderServiceImpl implements OrderService {
         return order.getId();
     }
 
+    /**
+     * @desc 주문 리스트 조회
+     * @param condition 주문 조회 조건
+     * @return
+     */
     @Override
     public List<Order> orderList(OrderSearchCondition condition) {
         return orderRepository.orderList(condition);
     }
 
+    /**
+     * @desc 주문 취소 상태 변경 (dirty checking 변겸감지)
+     * @param orderId
+     * @return
+     */
     @Override
     @Transactional
     public String cancel(Long orderId) {
@@ -82,6 +102,11 @@ public class OrderServiceImpl implements OrderService {
         return result;
     }
 
+    /**
+     * @desc orderId에 맞는 주문 조회
+     * @param orderId
+     * @return
+     */
     @Override
     public Order findById(Long orderId) {
         Order order = orderRepository.findById(orderId).orElseThrow(() -> new IllegalArgumentException("해당 주문이 없습니다. id : " + orderId));
@@ -89,11 +114,22 @@ public class OrderServiceImpl implements OrderService {
         return order;
     }
 
+    /**
+     * @desc 주문 리스트 페이징
+     * @param condition
+     * @param pageable
+     * @return
+     */
     @Override
     public Page<Order> orderPageList(OrderSearchCondition condition, Pageable pageable) {
         return orderRepository.orderPageList(condition, pageable);
     }
 
+    /**
+     * @desc 주문 상품 상세 정보 조회
+     * @param orderId
+     * @return
+     */
     @Override
     public List<OrderItemDto> findOrderItemsById(Long orderId) {
         return orderItemQueryRepository.orderItemList(orderId);

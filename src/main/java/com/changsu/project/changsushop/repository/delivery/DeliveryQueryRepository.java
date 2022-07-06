@@ -20,6 +20,11 @@ import static com.changsu.project.changsushop.domain.QDelivery.*;
 import static com.changsu.project.changsushop.domain.QMember.*;
 import static com.changsu.project.changsushop.domain.QOrder.*;
 
+/**
+ * @desc 배송 레포지토리 QueryDSL 구현
+ * @author ChangSu, Ham
+ * @version 1.0
+ */
 @Repository
 public class DeliveryQueryRepository {
 

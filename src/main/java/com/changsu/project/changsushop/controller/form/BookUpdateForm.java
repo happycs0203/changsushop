@@ -9,6 +9,11 @@ import org.hibernate.validator.constraints.Range;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 
+/**
+ * @desc 교제 정보 수정 폼
+ * @author ChangSu, Ham
+ * @version 1.0
+ */
 @Data
 @NoArgsConstructor
 public class BookUpdateForm {

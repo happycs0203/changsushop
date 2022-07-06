@@ -18,6 +18,11 @@ import org.springframework.stereotype.Service;
 import javax.servlet.http.HttpSession;
 import java.util.Collections;
 
+/**
+ * @desc 구글, 네이버 로그인 구현
+ * @author ChangSu, Ham
+ * @version 1.0
+ */
 @RequiredArgsConstructor
 @Service
 public class CustomOAuth2UserService implements OAuth2UserService<OAuth2UserRequest, OAuth2User> {
@@ -33,10 +38,11 @@ public class CustomOAuth2UserService implements OAuth2UserService<OAuth2UserRequ
         String registrationId = userRequest.getClientRegistration().getRegistrationId(); //현재 로그인 진행 중인 서비스를 구분하는 코드 지금은 구글만 사용
         String userNameAttributeName = userRequest.getClientRegistration().getProviderDetails()
                 .getUserInfoEndpoint().getUserNameAttributeName(); //로그인 진행 시 키가 되는 필드값 PrimaryKey와 값은 의미
-
+        //구글, 네이버에서 가지고 정보
         OAuthAttributes attributes = OAuthAttributes.of(registrationId, userNameAttributeName, oAuth2User.getAttributes());
 
         Member member = saveOrUpdate(attributes);
+        //세션 등록
         httpSession.setAttribute(SessionConst.LOGIN_MEMBER, new SessionMember(member));
 
         return new DefaultOAuth2User(Collections.singleton(new SimpleGrantedAuthority(member.getRoleKey())),
@@ -45,6 +51,11 @@ public class CustomOAuth2UserService implements OAuth2UserService<OAuth2UserRequ
 
     }
 
+    /**
+     * 네이버, 구글 로그인을 하면 DB에 등록 시켜주고 이미 이메일이 존재했을시 멤버 정보를 업데이트 합니다.
+     * @param attributes
+     * @return
+     */
     private Member saveOrUpdate(OAuthAttributes attributes) {
         Member member = memberRepository.findByEmail(attributes.getEmail())
                 .map(entity -> entity.updateName(attributes.getName()))

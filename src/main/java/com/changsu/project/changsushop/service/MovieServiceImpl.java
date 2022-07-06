@@ -8,6 +8,11 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+/**
+ * @desc 영화 서비스 구현
+ * @author ChangSu, Ham
+ * @version 1.0
+ */
 @Service
 @Transactional(readOnly = true)
 @RequiredArgsConstructor
@@ -15,18 +20,33 @@ public class MovieServiceImpl implements MovieService{
 
     private final MovieRepository movieRepository;
 
+    /**
+     * @desc id에 맞는 영화 조회
+     * @param id
+     * @return
+     */
     @Override
     public Movie findById(Long id) {
         Movie movie = movieRepository.findById(id).orElseThrow(() -> new IllegalArgumentException("해당 영화가 없습니다. id : " + id));
         return movie;
     }
 
+    /**
+     * @desc id에 맞는 영화 조회 MovieUpdateForm 리턴
+     * @param id
+     * @return
+     */
     @Override
     public MovieUpdateForm findByIdMUF(Long id) {
         Movie movie = movieRepository.findById(id).orElseThrow(() -> new IllegalArgumentException("해당 영화가 없습니다. id : " + id));
         return new MovieUpdateForm(movie);
     }
 
+    /**
+     * @desc 영화 생성
+     * @param form
+     * @return
+     */
     @Override
     @Transactional
     public Long createMovie(MovieSaveForm form) {
@@ -35,6 +55,11 @@ public class MovieServiceImpl implements MovieService{
         return savedMovie.getId();
     }
 
+    /**
+     * @desc 영화 수정 (dirty checking 변겸감지)
+     * @param form
+     * @return
+     */
     @Override
     @Transactional
     public Long updateMovie(MovieUpdateForm form) {

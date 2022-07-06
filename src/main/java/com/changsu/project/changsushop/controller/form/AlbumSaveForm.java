@@ -9,6 +9,11 @@ import javax.validation.constraints.Max;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 
+/**
+ * @desc 앨범 정보 저장 폼 
+ * @author ChangSu, Ham
+ * @version 1.0
+ */
 @Data
 @NoArgsConstructor
 public class AlbumSaveForm {

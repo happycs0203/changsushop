@@ -13,6 +13,11 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
+/**
+ * @desc 배송 서비스 구현
+ * @author ChangSu, Ham
+ * @version 1.0
+ */
 @Service
 @RequiredArgsConstructor
 @Transactional
@@ -21,6 +26,11 @@ public class DeliveryServiceImpl implements DeliveryService{
     private final DeliveryRepository deliveryRepository;
     private final OrderRepository orderRepository;
 
+    /**
+     * @desc 배송 상태 변경
+     * @param deliveries
+     * @return
+     */
     @Override
     public String changeStatus(List<Long> deliveries){
 
@@ -37,6 +47,11 @@ public class DeliveryServiceImpl implements DeliveryService{
         return result;
     }
 
+    /**
+     * @desc 배송 조건에 맞는 배송건 배송상테 변경
+     * @param condition
+     * @return
+     */
     @Override
     public String changeStatusOne(DeliveryModifyCondition condition) {
         String result = "success";

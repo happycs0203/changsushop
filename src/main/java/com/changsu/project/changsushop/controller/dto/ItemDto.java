@@ -7,6 +7,11 @@ import org.springframework.data.annotation.LastModifiedDate;
 
 import java.time.LocalDateTime;
 
+/**
+ * @desc 모든 상품 정보 DTO
+ * @author ChangSu, Ham
+ * @version 1.0
+ */
 @Data
 public class ItemDto {
 

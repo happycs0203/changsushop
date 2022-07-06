@@ -11,6 +11,11 @@ import javax.persistence.*;
 
 import static javax.persistence.FetchType.LAZY;
 
+/**
+ * @desc 배송 정보 엔티티
+ * @author ChangSu, Ham
+ * @version 1.0
+ */
 @Entity
 @Getter
 @Setter(AccessLevel.PROTECTED)
@@ -22,10 +27,10 @@ public class Delivery extends BaseEntity {
     private Long id;
 
     @OneToOne(mappedBy = "delivery", fetch = LAZY,cascade = CascadeType.ALL,orphanRemoval = true)
-    private Order order;
+    private Order order; //주문
 
     @Embedded
-    private Address address;
+    private Address address; //주소
 
     @Enumerated(EnumType.STRING)
     private DeliveryStatus status; //READY, COMP (ORDINAL일경우 1,2로 매핑이된다.) 꼭 STRING으로 사용한다.

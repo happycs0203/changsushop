@@ -4,6 +4,11 @@ import com.changsu.project.changsushop.controller.form.MemberSaveForm;
 import com.changsu.project.changsushop.controller.form.MemberUpdateForm;
 import com.changsu.project.changsushop.domain.Member;
 
+/**
+ * @desc 멤버 서비스 인터페이스
+ * @author ChangSu, Ham
+ * @version 1.0
+ */
 public interface MemberService {
 
     public Member findById(Long id);

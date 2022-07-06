@@ -5,6 +5,7 @@ import com.changsu.project.changsushop.controller.form.MemberUpdateForm;
 import com.changsu.project.changsushop.domain.Member;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.Test;
+import org.junit.platform.commons.util.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.transaction.annotation.Transactional;
@@ -56,10 +57,9 @@ class MemberServiceTest {
         Member updateMember = memberService.findById(saveId);
 
         //then
-        assertThat(saveId).isEqualTo(saveId);
+
         assertThat(updateMember.getName()).isEqualTo("함창수1");
 
     }
-
 
 }

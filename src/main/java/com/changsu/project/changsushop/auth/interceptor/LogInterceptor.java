@@ -9,11 +9,19 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.util.UUID;
 
+/**
+ * @desc 로그 인터셉터
+ * @author ChangSu, Ham
+ * @version 1.0
+ */
 @Slf4j
 public class LogInterceptor implements HandlerInterceptor {
 
     public static final String LOG_ID = "logId";
 
+    /**
+     * @desc 컨트롤 진입전에 실행
+     */
     @Override
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
 
@@ -33,12 +41,17 @@ public class LogInterceptor implements HandlerInterceptor {
         return true;
     }
 
-
+    /**
+     * @desc 컨트롤 진입 후 View가 랜더링 되기 전에 수행
+     */
     @Override
     public void postHandle(HttpServletRequest request, HttpServletResponse response, Object handler, ModelAndView modelAndView) throws Exception {
         log.info("postHandle [{}]", modelAndView);
     }
 
+    /**
+     * @desc 컨트롤 진입 후 View가 랜더링 된 후에 수행
+     */
     @Override
     public void afterCompletion(HttpServletRequest request, HttpServletResponse response, Object handler, Exception ex) throws Exception {
         String requestURI = request.getRequestURI();

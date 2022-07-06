@@ -13,6 +13,11 @@ import java.util.List;
 
 import static javax.persistence.FetchType.LAZY;
 
+/**
+ * @desc 주문 정보 엔티티
+ * @author ChangSu, Ham
+ * @version 1.0
+ */
 @Entity
 @Table(name = "orders")
 @Getter @Setter(AccessLevel.PROTECTED)
@@ -29,7 +34,7 @@ public class Order extends BaseEntity {
     //member를 변경하고 싶으면 FK를 변경해야됨 객체는 orders와 member 2군데를 수정해야된다.
 
     @OneToMany(mappedBy = "order", cascade = CascadeType.ALL)
-    private List<OrderItem> orderItems = new ArrayList<>();
+    private List<OrderItem> orderItems = new ArrayList<>(); //주문 상품들
 
     //persist(orderItemA), persist(orderItemB) , persist(orderItemC) -> persist(order)이것만 하면 한번에 다 된다.
 

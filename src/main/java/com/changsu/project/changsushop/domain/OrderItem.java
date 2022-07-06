@@ -12,6 +12,11 @@ import javax.persistence.*;
 
 import static javax.persistence.FetchType.LAZY;
 
+/**
+ * @desc 주문 상품 매핑 엔티티
+ * @author ChangSu, Ham
+ * @version 1.0
+ */
 @Entity
 @Getter @Setter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)

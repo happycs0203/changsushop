@@ -11,6 +11,11 @@ import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
 
+/**
+ * @desc 멤버 조회 폼
+ * @author ChangSu, Ham
+ * @version 1.0
+ */
 @Data
 @NoArgsConstructor
 public class MemberForm {

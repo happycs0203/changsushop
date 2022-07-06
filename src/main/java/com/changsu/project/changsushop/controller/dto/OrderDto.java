@@ -7,6 +7,11 @@ import lombok.Data;
 
 import java.time.LocalDateTime;
 
+/**
+ * @desc 주문 정보 DTO
+ * @author ChangSu, Ham
+ * @version 1.0
+ */
 @Data
 public class OrderDto {
 

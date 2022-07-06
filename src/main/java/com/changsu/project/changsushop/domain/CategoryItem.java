@@ -9,6 +9,11 @@ import lombok.Setter;
 
 import javax.persistence.*;
 
+/**
+ * @desc 카테고리 상품 매핑 엔티티
+ * @author ChangSu, Ham
+ * @version 1.0
+ */
 @Entity
 @Getter @Setter(AccessLevel.PROTECTED)
 @NoArgsConstructor(access = AccessLevel.PROTECTED)

@@ -15,6 +15,11 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.validation.constraints.*;
 
+/**
+ * @desc 멤버 수정 폼
+ * @author ChangSu, Ham
+ * @version 1.0
+ */
 @Data
 @NoArgsConstructor
 public class MemberUpdateForm {

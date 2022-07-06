@@ -4,10 +4,15 @@ import com.changsu.project.changsushop.controller.dto.DeliveryModifyCondition;
 
 import java.util.List;
 
+/**
+ * @desc 배송 서비스 인터페이스
+ * @author ChangSu, Ham
+ * @version 1.0
+ */
 public interface DeliveryService {
 
-    public String changeStatus(List<Long> deliveries);
+    String changeStatus(List<Long> deliveries);
 
-    public String changeStatusOne(DeliveryModifyCondition condition);
+    String changeStatusOne(DeliveryModifyCondition condition);
 
 }

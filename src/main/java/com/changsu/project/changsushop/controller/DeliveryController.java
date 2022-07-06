@@ -14,6 +14,11 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
+/**
+ * @desc 배송 조회, 배송상태수정 컨트롤러
+ * @author ChangSu, Ham
+ * @version 1.0
+ */
 @Controller
 @RequiredArgsConstructor
 public class DeliveryController {
@@ -21,6 +26,13 @@ public class DeliveryController {
     private final DeliveryQueryRepository deliveryQueryRepository;
     private final DeliveryService deliveryService;
 
+    /**
+     * @desc 배송 관련 정보 조회
+     * @param model
+     * @param condition 배송 상세 조회 정보
+     * @param pageable
+     * @return
+     */
     @GetMapping("/deliveries")
     public String deliveries(Model model, @ModelAttribute("deliverySearch") DeliverySearchCondition condition, Pageable pageable) {
 
@@ -32,6 +44,11 @@ public class DeliveryController {
         return "deliveries/deliveryList";
     }
 
+    /**
+     * @desc 배송 정보 변경
+     * @param deliveries 여러개의 배송 아이디
+     * @return
+     */
     @PostMapping("/deliveries/changeStatus")
     @ResponseBody
     public String changeDeliveriesStatus(@RequestParam("deliveries[]") List<Long> deliveries){
@@ -41,6 +58,12 @@ public class DeliveryController {
         return result;
     }
 
+    /**
+     * @desc 배송 정보 수정
+     * @param deliveryId 배송 아이디
+     * @param condition 배송 상태
+     * @return
+     */
     @PostMapping("/deliveries/{deliveryId}/changeStatus")
     @ResponseBody
     public String changeDeliveryStatus(@PathVariable("deliveryId") Long deliveryId, @ModelAttribute("delivery") DeliveryModifyCondition condition) {

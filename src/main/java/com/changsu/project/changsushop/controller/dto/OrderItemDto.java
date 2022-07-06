@@ -3,6 +3,11 @@ package com.changsu.project.changsushop.controller.dto;
 import com.querydsl.core.annotations.QueryProjection;
 import lombok.Data;
 
+/**
+ * @desc 주문 상세 정보 DTO
+ * @author ChangSu, Ham
+ * @version 1.0
+ */
 @Data
 public class OrderItemDto {
 

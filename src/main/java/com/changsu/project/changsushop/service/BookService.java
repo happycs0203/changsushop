@@ -4,14 +4,19 @@ import com.changsu.project.changsushop.controller.form.BookSaveForm;
 import com.changsu.project.changsushop.controller.form.BookUpdateForm;
 import com.changsu.project.changsushop.domain.item.Book;
 
+/**
+ * @desc 책 서비스 인터페이스
+ * @author ChangSu, Ham
+ * @version 1.0
+ */
 public interface BookService {
 
-    public Book findById(Long id);
+    Book findById(Long id);
 
-    public BookUpdateForm findByIdBUF(Long id);
+    BookUpdateForm findByIdBUF(Long id);
 
-    public Long createBook(BookSaveForm form);
+    Long createBook(BookSaveForm form);
 
-    public Long updateBook(BookUpdateForm form);
+    Long updateBook(BookUpdateForm form);
 
 }

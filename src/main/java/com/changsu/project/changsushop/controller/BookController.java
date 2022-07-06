@@ -1,5 +1,10 @@
 package com.changsu.project.changsushop.controller;
 
+/**
+ * @desc 상품 - 책 저장 수정 조회 컨트롤러
+ * @author ChangSu, Ham
+ * @version 1.0
+ */
 import com.changsu.project.changsushop.controller.form.BookSaveForm;
 import com.changsu.project.changsushop.controller.form.BookUpdateForm;
 import com.changsu.project.changsushop.domain.item.Book;
@@ -23,6 +28,12 @@ public class BookController {
 
     private final BookService bookService;
 
+    /**
+     * @desc 책 정보 페이지 이동
+     * @param bookId
+     * @param model
+     * @return
+     */
     @GetMapping("/items/books/{bookId}")
     public String book(@PathVariable("bookId") Long bookId, Model model){
         Book findBook = bookService.findById(bookId);
@@ -31,12 +42,24 @@ public class BookController {
         return "items/books/book";
     }
 
+    /**
+     * @desc 책 생성 페이지 이동
+     * @param model
+     * @return
+     */
     @GetMapping("/items/books/new")
     public String createBookForm(Model model) {
         model.addAttribute("bookForm", new BookSaveForm());
         return "items/books/createBookForm";
     }
 
+    /**
+     * @desc 책 생성 로직
+     * @param form 책 생성 객체
+     * @param bindingResult 검증 객체
+     * @param redirectAttributes 리다이렉트 데이터 매핑
+     * @return
+     */
     @PostMapping("/items/books/new")
     public String createBook(@Validated @ModelAttribute("bookForm") BookSaveForm form, BindingResult bindingResult, RedirectAttributes redirectAttributes) {
 
@@ -52,6 +75,12 @@ public class BookController {
         return "redirect:/items/books/{bookId}";
     }
 
+    /**
+     * @desc 교재 수정 페이지 이동
+     * @param bookId
+     * @param model
+     * @return
+     */
     @GetMapping("/items/books/{bookId}/update")
     public String updateBookForm(@PathVariable("bookId") Long bookId, Model model) {
         BookUpdateForm bookForm = bookService.findByIdBUF(bookId);
@@ -59,6 +88,14 @@ public class BookController {
         return "items/books/updateBookForm";
     }
 
+    /**
+     * @desc 책 수정 로직
+     * @param bookId 수정 교재 아이디
+     * @param form 교제 수정 객체
+     * @param bindingResult 검증 객체
+     * @param redirectAttributes 리다이렉트 데이터 매핑
+     * @return
+     */
     @PostMapping("/items/books/{bookId}/update")
     public String updateBook(@PathVariable("bookId") Long bookId,@Validated @ModelAttribute("bookForm") BookUpdateForm form, BindingResult bindingResult, RedirectAttributes redirectAttributes) {
 

@@ -8,11 +8,16 @@ import org.springframework.data.domain.Pageable;
 
 import java.util.List;
 
+/**
+ * @desc 주문 커스텀 레포지토리 인터페이스
+ * @author ChangSu, Ham
+ * @version 1.0
+ */
 public interface OrderRepositoryCustom {
 
-    public OrderDto orderById(Long orderId);
+    OrderDto orderById(Long orderId);
 
-    public List<Order> orderList(OrderSearchCondition condition);
+    List<Order> orderList(OrderSearchCondition condition);
 
-    public Page<Order> orderPageList(OrderSearchCondition condition, Pageable pageable);
+    Page<Order> orderPageList(OrderSearchCondition condition, Pageable pageable);
 }

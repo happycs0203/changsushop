@@ -10,14 +10,19 @@ import lombok.Setter;
 import javax.persistence.DiscriminatorValue;
 import javax.persistence.Entity;
 
+/**
+ * @desc 상품 - 영화 정보 엔티티
+ * @author ChangSu, Ham
+ * @version 1.0
+ */
 @Entity
 @DiscriminatorValue("MOVIE")
 @Getter @Setter(AccessLevel.PROTECTED)
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 public class Movie extends Item {
 
-    private String director;
-    private String actor;
+    private String director; //감독
+    private String actor; //배우
 
     public Movie(int price, String name, int stockQuantity,String director, String actor) {
         setPrice(price);

@@ -23,6 +23,11 @@ import static com.changsu.project.changsushop.domain.QOrder.*;
 import static com.changsu.project.changsushop.domain.QOrderItem.*;
 import static com.changsu.project.changsushop.domain.item.QItem.*;
 
+/**
+ * @desc 주문 커스텀 레포지토리 구현 queryDSL 사용
+ * @author ChangSu, Ham
+ * @version 1.0
+ */
 public class OrderRepositoryImpl implements OrderRepositoryCustom {
 
     private final JPAQueryFactory queryFactory;
@@ -31,6 +36,12 @@ public class OrderRepositoryImpl implements OrderRepositoryCustom {
         this.queryFactory = new JPAQueryFactory(em);
     }
 
+    /**
+     * @desc 주문 객체 조회
+     * @param orderId
+     * @return
+     */
+    @Override
     public OrderDto orderById(Long orderId) {
         OrderDto orderDto = queryFactory.select(new QOrderDto(
                         order.id,
@@ -52,6 +63,12 @@ public class OrderRepositoryImpl implements OrderRepositoryCustom {
     }
 
 
+    /**
+     * @desc 주문 상세 조회
+     * @param condition 주문 조회 상세 객체
+     * @return
+     */
+    @Override
     public List<Order> orderList(OrderSearchCondition condition){
         List<Order> orders = queryFactory.select(order)
                 .from(order)
@@ -66,6 +83,13 @@ public class OrderRepositoryImpl implements OrderRepositoryCustom {
         return orders;
     }
 
+    /**
+     * @desc 주문 상세 조회 페이징
+     * @param condition 주문 조회 상세 객체
+     * @param pageable 페이징 객체
+     * @return
+     */
+    @Override
     public Page<Order> orderPageList(OrderSearchCondition condition, Pageable pageable) {
         List<Order> orders = queryFactory.select(order)
                 .from(order)
@@ -92,16 +116,12 @@ public class OrderRepositoryImpl implements OrderRepositoryCustom {
     }
 
     private BooleanExpression orderStatusEq(OrderStatus orderStatus) {
-        if (orderStatus != null) {
-            return order.status.eq(orderStatus);
-        }
+        if (orderStatus != null) return order.status.eq(orderStatus);
         return null;
     }
 
     private BooleanExpression memberNameEq(String memberName) {
-        if (StringUtils.hasText(memberName)) {
-            return member.name.eq(memberName);
-        }
+        if (StringUtils.hasText(memberName)) return member.name.eq(memberName);
         return null;
     }
 

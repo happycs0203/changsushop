@@ -4,6 +4,11 @@ import lombok.Data;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 
+/**
+ * @desc 회원 역할
+ * @author ChangSu, Ham
+ * @version 1.0
+ */
 @Getter
 @RequiredArgsConstructor
 public enum Role {

@@ -10,6 +10,11 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.StringUtils;
 
+/**
+ * @desc 멤버 서비스 구현
+ * @author ChangSu, Ham
+ * @version 1.0
+ */
 @Service
 @Transactional(readOnly = true)
 @RequiredArgsConstructor
@@ -17,17 +22,32 @@ public class MemberServiceImpl implements MemberService{
 
     private final MemberRepository memberRepository;
 
+    /**
+     * @desc id에 맞는 멤버 조회
+     * @param id
+     * @return
+     */
     @Override
     public Member findById(Long id) {
         return memberRepository.findById(id).orElseThrow(() -> new IllegalArgumentException("해당 회원이 없습니다. id :" + id));
     }
 
+    /**
+     * @desc id에 맞는 멤버 조회 MemberUpdateForm으로 리턴
+     * @param id
+     * @return
+     */
     @Override
     public MemberUpdateForm findByIdMUF(Long id) {
         Member member = memberRepository.findById(id).orElseThrow(() -> new IllegalArgumentException("해당 회원이 없습니다. id :" + id));
         return new MemberUpdateForm(member);
     }
 
+    /**
+     * @desc 멤버 생성
+     * @param memberSaveForm
+     * @return
+     */
     @Override
     @Transactional
     public Long save(MemberSaveForm memberSaveForm) {
@@ -42,6 +62,11 @@ public class MemberServiceImpl implements MemberService{
         return null;
     }
 
+    /**
+     * @desc memberUpdateForm에 들어온 값으로 수정
+     * @param memberUpdateForm
+     * @return
+     */
     @Override
     @Transactional
     public Long update(MemberUpdateForm memberUpdateForm) {
@@ -58,12 +83,21 @@ public class MemberServiceImpl implements MemberService{
         return findMember.getId();
     }
 
+    /**
+     * @desc 멤버 비밀번호 확인
+     * @param memberUpdateForm
+     * @return
+     */
     @Override
     public boolean checkPassword(MemberUpdateForm memberUpdateForm) {
         Member member = memberRepository.findById(memberUpdateForm.getId()).orElseThrow(() -> new IllegalArgumentException("해당 회원이 없습니다. id :" + memberUpdateForm.getId()));
         return member.checkPassword(memberUpdateForm.getPassword());
     }
 
+    /**
+     * @desc 회원 삭제
+     * @param memberUpdateForm
+     */
     @Override
     @Transactional
     public void delete(MemberUpdateForm memberUpdateForm) {
